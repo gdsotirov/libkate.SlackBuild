@@ -1,15 +1,31 @@
 #!/bin/sh
 #
-# SlackBuild for LibKate
-# Written by Georgi D. Sotirov <gdsotirov@dir.bg>
+# Slackware build script for LibKate
+# Copyright (C) 2008-2011 Georgi D. Sotirov <gdsotirov@dir.bg>
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+# 
+# $Id: libkate.SlackBuild,v 1.6 2011/12/24 20:37:17 gsotirov Exp $
 #
 
-. ../slack-package.conf
+. ../../slack-package.conf
 
 NAME=libkate
-VERSION=0.3.8
+VERSION=0.4.1
 ARCH=${ARCH:-i486}
-BUILD=1
+BUILD=${BUILD:-1}
 
 TMP=${TMP:-/tmp}
 CWD=${CWD:-`pwd`}
@@ -33,7 +49,7 @@ mkdir -p $PKG
 
 # Extract the source
 cd $TMP
-tar -zxvf $CWD/$NAME-$VERSION.tar.gz || exit 1
+tar -xvf $CWD/$NAME-$VERSION.tar.?z* || exit 3
 cd $SRC
 fix_source
 
@@ -44,22 +60,19 @@ CXXFLAGS=$SLKCFLAGS \
             --host=$ARCH-slackware-linux \
             --prefix=/usr \
             --sysconfdir=/etc \
+            --libdir=/usr/lib${LIBDIRSUFFIX} \
             --mandir=/usr/man \
             --docdir=/usr/doc/$NAME-$VERSION \
             --enable-shared=yes \
-            --enable-static=no || exit 2
+            --enable-static=no || exit 4
 
-# Build
-make -j4 all || exit 3 
-
-# Install
-make DESTDIR=$PKG install || exit 3
+# Build & install
+make -j4 all || exit 5
+make DESTDIR=$PKG install || exit 5
 
 # Prepare
 bin_perms $PKG
 ( cd $PKG; strip_bin; strip_lib )
-# Documents installed already
-#( cd $SRC; create_docs $PKG $NAME-$VERSION )
 gzip_man $PKG
 
 mkdir -p $PKG/install
