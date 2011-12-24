@@ -1,4 +1,4 @@
-glibc-solibs >= 2.11.1
-libogg >= 1.1.4
-libpng >= 1.4.2
-zlib >= 1.2.3
+glibc-solibs >= 2.13
+libogg >= 1.2.2
+libpng >= 1.4.5
+zlib >= 1.2.5
