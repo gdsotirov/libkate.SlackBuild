@@ -17,7 +17,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 # 
-# $Id: libkate.SlackBuild,v 1.7 2016/08/22 20:38:37 gsotirov Exp $
+# $Id: libkate.SlackBuild,v 1.8 2016/08/22 20:56:17 gsotirov Exp $
 #
 
 . ../../slack-package.conf
@@ -56,6 +56,7 @@ fix_source
 # Configure
 CFLAGS=$SLKCFLAGS \
 CXXFLAGS=$SLKCFLAGS \
+LEXLIB=/usr/lib${LIBDIRSUFFIX}/libfl.a \
 ./configure --build=$ARCH-slackware-linux \
             --host=$ARCH-slackware-linux \
             --prefix=/usr \
