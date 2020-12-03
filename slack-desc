@@ -10,4 +10,4 @@ libkate: be achieved. This was originally meant for karaoke use, but can be
 libkate: used for any purpose.  Motions can be attached to various semantics,
 libkate: like position, color, etc, so scrolling or fading text can be
 libkate: defined.
-libkate: Packaged by Georgi D. Sotirov <gdsotirov@dir.bg>
+libkate: Packaged by Georgi D. Sotirov <gdsotirov@gmail.com>
